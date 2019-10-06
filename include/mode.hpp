@@ -21,17 +21,23 @@ namespace fabric
         */
        Fast = 1,
        /*
-            In "Tense" mode we mostly benefit from reallocation compacting routines, 
-            defragmenting, and some mild safety. This mode does cause a performance
-            decline, but can be worth it for allowing large amounts of easy scaling
-            to multiple cores. The main change is that dangling pointers don't
-            cause segfaults or memory corruption, but instead throw exceptions that
-            can be caught by user systems.
+            In "Tense" mode we mostly benefit from some mild safety. This mode does
+            cause a performance decline, but can be worth it for allowing large
+            amounts of easier scaling to multiple cores. The main change is that
+            dangling pointers don't cause segfaults or memory corruption, but
+            instead throw exceptions that can be caught by user systems.
        */
       Tense = 2,
       /*
-
+            In "taut" mode, we get the above safety with additional memory relocation
+            and compacting routines, which can be especially useful for games that have
+            long runtimes / uptimes (e.g, dedicated servers benefit from such things, potentially).
+            Defragmenting of memory can also be performed too, performed by memory
+            "category" set by the user. This way memory categories can be moved closer together, 
+            then using supplied comparator functions and type hashes to further sort items 
+            into new in-memory locations.
       */
+     Taut = 3
     };
 
 }
